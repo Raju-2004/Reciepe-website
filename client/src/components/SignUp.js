@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {Link} from 'react-router-dom'
-import "./App.css";
+import '../../src/App.css';
 
 const SignUp = () => {
   const [FormData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -15,8 +15,29 @@ const SignUp = () => {
       [name]: value,
     }));
   };
-  const onHandleSubmit = (e) => {
-    e.preventDefault();
+  const onHandleSubmit = async(e) => {
+    e.preventDefault()
+    try{
+      const response = await fetch('http://localhost:4000/signup',{
+        method :'POST',
+        headers : {
+          'Content-Type':'application/json'
+        },
+        body : JSON.stringify(FormData)
+      })
+      if(response.ok)
+      {
+        const data = await response.json();
+        console.log(data);
+        console.log('User registered successfully')
+      }
+      else{
+        console.error('Failed to register user')
+      }
+    }
+    catch(err){
+      console.error('Error Registering user : ',err)
+    }
     console.log("Form Submitted", FormData);
   };
   return (
