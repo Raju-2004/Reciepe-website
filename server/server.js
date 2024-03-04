@@ -31,7 +31,7 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
-app.get("/dashboard", authenticateToken, (req, res) => {
+app.get("/recipes", authenticateToken, (req, res) => {
   res.send("hii");
 });
 
@@ -59,7 +59,7 @@ app.post("/signup", async (req, res) => {
       email,
     });
     await newUser.save();
-    res.status(201).json({ message: "User created successfully" ,user:newUser});
+    res.status(201).json({ message: "User created successfully", user: newUser });
   } catch (error) {
     console.error("Error in signup", error);
     res.status(500).json({ message: "Interval server error" });
@@ -84,7 +84,7 @@ app.post("/login", async (req, res) => {
     }
     const accessToken = generateAccessToken({ email: user.email });
     const refreshToken = generateRefreshToken(user);
-    res.json({ accessToken, refreshToken });
+    res.json({ accessToken, refreshToken, user });
   } catch (error) {
     console.error("Error in login", error);
     res.status(500).json({ message: "Internal server error" });

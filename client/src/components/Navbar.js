@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import Logo from '../images/logo.png'
+import Logo from '../assets/recipe-logo.png'
 import { HiMenuAlt3 } from 'react-icons/hi'
 import { AiOutlineClose } from 'react-icons/ai'
+import { Link } from 'react-router-dom';
 import Button from './Button'
-
+ 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
 
@@ -26,11 +27,11 @@ const Navbar = () => {
                         <a href="/favorites">Favorites</a>
                     </li>
                 </ul>
-
-                <Button
+                <Link to='/signup' className='hidden md:block bg-transparent border py-2 pl-8 border-white text-white hover:bg-white hover:text-slate-700 rounded-full min-w-[130px]'>Sign Up </Link>
+                {/* <Button
                     title='Sign in'
-                    conteinerStyle='hidden md:block bg-transparent border border-white text-white hover:bg-white hover:text-slate-700 rounded-full min-w-[130px]'
-                />
+                    containerStyle='hidden md:block bg-transparent border border-white text-white hover:bg-white hover:text-slate-700 rounded-full min-w-[130px]'
+                /> */}
 
                 <button className='block md:hidden text-white text-xl'
                     onClick={() => setOpen(prev => !prev)}>
